@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المعيد - معاهد العبور</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../../core/theme/variables.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header text-center py-4">
+            <h4 class="fw-bold m-0 fs-5" style="color: var(--white);">نظام الخريجين</h4>
+            <small class="opacity-75 text-white">معاهد العبور العليا</small>
+        </div>
+        <nav class="sidebar-nav mt-3">
+            <a href="#" class="active"><i class="fas fa-home ms-2"></i> الرئيسية</a>
+            <a href="teams.html"><i class="fas fa-users ms-2"></i> الفرق والطلاب</a>
+            <a href="#"><i class="fas fa-calendar-alt ms-2"></i> المواعيد والقاعات</a>
+            <a href="#"><i class="fas fa-cog ms-2"></i> الإعدادات</a>
+            <a href="../../landing/views/index.html" style="color: #ffc107;"><i class="fas fa-sign-out-alt ms-2"></i> خروج</a>
+        </nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <header class="main-header shadow-sm">
+        <div class="d-flex align-items-center">
+            <button class="btn-toggle" id="openSidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h4 class="m-0 ms-3 fw-bold" style="color: var(--primary-color);">لوحة التحكم</h4>
+        </div>
+        <div class="user-profile fw-bold">
+            <span id="userName">جاري التحميل...</span> 
+            <i class="fas fa-user-circle ms-2 text-primary fs-4"></i>
+        </div>
+    </header>
+
+    <main class="content-area">
+        <div class="container-fluid">
+            <div class="card-custom shadow-sm p-4 bg-white rounded-4">
+                <h5 class="fw-bold mb-4">
+                    <i class="fas fa-calendar-alt text-primary ms-2"></i>جدول المواعيد والقاعات
+                </h5>
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="../viewmodels/dashboard_viewmodel.js"></script>
+</body>
+</html>

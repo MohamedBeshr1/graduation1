@@ -1,0 +1,114 @@
+/* features/dashboard/css/dashboard.css */
+
+body { 
+    font-family: 'Cairo', sans-serif; 
+    background-color: var(--accent-color); 
+    overflow-x: hidden; 
+    margin: 0; 
+    padding: 0; 
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -280px; /* مخفي جهة اليمين في البداية */
+    width: 280px;
+    height: 100vh;
+    background: var(--primary-color);
+    color: var(--white);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2000;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.active { 
+    right: 0; 
+}
+
+.sidebar-header {
+    padding: 30px 20px;
+    text-align: center;
+    background: rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 15px 25px;
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-weight: 700;
+}
+
+.sidebar-nav a:hover, .sidebar-nav a.active {
+    background: var(--secondary-color);
+    padding-right: 35px; /* حركة الـ Slide عند الـ Hover */
+}
+
+/* Overlay Style */
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 1500;
+}
+.overlay.active { 
+    display: block; 
+}
+
+/* Header & Content Area */
+.main-header {
+    background: var(--white);
+    padding: 15px 30px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.btn-toggle {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: var(--transition-smooth);
+}
+
+.btn-toggle:hover {
+    background: var(--secondary-color);
+}
+
+.content-area { 
+    padding: 30px; 
+}
+
+.card-custom {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+    border: none;
+}
+
+/* FullCalendar Customization (عشان يليق مع الثيم) */
+.fc .fc-button-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.fc .fc-button-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}

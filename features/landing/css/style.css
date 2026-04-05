@@ -1,0 +1,72 @@
+/* الأكواد اللي كانت محشورة جوه الـ HTML جمعتهالك هنا */
+.comparison-box {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.paper-side {
+    background: #fdfdfd;
+    border-left: 1px solid #eee;
+}
+.digital-side {
+    background: var(--white);
+}
+.feature-card {
+    border-radius: 20px;
+    transition: var(--transition-smooth);
+    height: 100%;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+.nav-auth-btn {
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    padding: 8px 25px !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+.hero-image-container, .about-img-container {
+    margin-top: 50px; 
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg); 
+    border: 8px solid rgba(255, 255, 255, 0.8); 
+}
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-sm);
+    border-right: 5px solid var(--primary-color);
+}
+/* الأكواد الخاصة بصفحة الأهداف - ضيفها في آخر الملف */
+.goal-card {
+    border: none;
+    border-radius: 20px;
+    background: var(--white);
+    transition: all 0.3s ease;
+    height: 100%;
+    border-bottom: 4px solid var(--primary-color);    
+    padding: 25px;
+}
+.goal-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg) !important;
+}
+.icon-badge {
+    width: 50px;
+    height: 50px;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+}

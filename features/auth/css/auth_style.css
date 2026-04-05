@@ -1,0 +1,42 @@
+/* features/auth/css/auth_style.css */
+.auth-bg {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #f0f4f8 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.login-card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: var(--shadow-lg);
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    border-top: 6px solid var(--primary-color);
+}
+
+.logo-title {
+    color: var(--primary-color);
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.btn-login {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 12px;
+    transition: var(--transition-smooth);
+}
+
+.btn-login:hover {
+    background-color: #002b5c;
+    transform: translateY(-2px);
+    color: white;
+}
+.register-card {
+    max-width: 700px !important; /* عشان الـ row اللي فيه حقلين جنب بعض يظهر مرتاح */
+}
