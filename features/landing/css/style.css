@@ -1,3 +1,15 @@
+/* تنسيق خلفية الهيرو */
+.main-hero-bg {
+    background-image: url('../assets/1630661401477.jpg'); /* تأكد من مسار الصورة صح */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* بيخلي الصورة ثابتة وأنت بتعمل سكرول (Parallax) */
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+features\landing\assets\1630661401477.jpg
 /* الأكواد اللي كانت محشورة جوه الـ HTML جمعتهالك هنا */
 .comparison-box {
     border-radius: 20px;
@@ -44,7 +56,6 @@
     box-shadow: var(--shadow-sm);
     border-right: 5px solid var(--primary-color);
 }
-/* الأكواد الخاصة بصفحة الأهداف - ضيفها في آخر الملف */
 .goal-card {
     border: none;
     border-radius: 20px;

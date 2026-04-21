@@ -38,5 +38,5 @@
     color: white;
 }
 .register-card {
-    max-width: 700px !important; /* عشان الـ row اللي فيه حقلين جنب بعض يظهر مرتاح */
+    max-width: 700px !important; 
 }

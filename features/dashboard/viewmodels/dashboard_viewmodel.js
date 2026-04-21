@@ -1,13 +1,11 @@
 // features/dashboard/viewmodels/dashboard_viewmodel.js
-
 document.addEventListener('DOMContentLoaded', function() {
+    // التأكد من تحديث الاسم من المخزن
+    const savedName = localStorage.getItem('userName');
+    const headerName = document.getElementById('userName');
     
-    // --- 1. جلب بيانات المستخدم (User Data) ---
-    // محاكاة للي هيحصل لما تربط بالباك إند
-    const loggedInUser = "د. محمد بشر"; 
-    const userNameEl = document.getElementById('userName');
-    if (userNameEl) {
-        userNameEl.textContent = loggedInUser;
+    if (savedName && headerName) {
+        headerName.innerText = savedName;
     }
 
     // --- 2. التحكم في القائمة الجانبية (Sidebar Logic) ---
@@ -23,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // وظيفة القفل عند الضغط على الطبقة المظلمة
     if (overlay) {
         overlay.addEventListener('click', function() {
             sidebar.classList.remove('active');
@@ -31,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- 3. تشغيل وتقوية التقويم (FullCalendar) ---
     const calendarEl = document.getElementById('calendar');
     if (calendarEl) {
         const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -53,9 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
             },
 
-            // هنا مستقبلاً هنضيف الـ Events اللي جاية من الداتابيز
             events: [
-                // مثال: { title: 'مناقشة مشروع تخرج', start: '2026-03-31' }
             ]
         });
         calendar.render();

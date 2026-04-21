@@ -23,9 +23,9 @@
         </div>
         <nav class="sidebar-nav mt-3">
             <a href="#" class="active"><i class="fas fa-home ms-2"></i> الرئيسية</a>
-            <a href="teams.html"><i class="fas fa-users ms-2"></i> الفرق والطلاب</a>
-            <a href="#"><i class="fas fa-calendar-alt ms-2"></i> المواعيد والقاعات</a>
-            <a href="#"><i class="fas fa-cog ms-2"></i> الإعدادات</a>
+            <a href="../../teams/views/teams.html"><i class="fas fa-users ms-2"></i> الفرق والطلاب</a>
+            <a href="../../schedules/views/schedules.html"><i class="fas fa-calendar-alt ms-2"></i> المواعيد والقاعات</a>
+            <a href="../../settings/views/settings.html"><i class="fas fa-cog ms-2"></i> الإعدادات</a>
             <a href="../../landing/views/index.html" style="color: #ffc107;"><i class="fas fa-sign-out-alt ms-2"></i> خروج</a>
         </nav>
     </aside>
@@ -58,5 +58,32 @@
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
     <script src="../viewmodels/dashboard_viewmodel.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. استرجاع الاسم
+    const savedName = localStorage.getItem('userName');
+    if (savedName) {
+        document.getElementById('userName').innerText = savedName;
+    }
+
+    // 2. كود الزرار (الأهم)
+    const openBtn = document.getElementById('openSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    if(openBtn && sidebar && overlay) {
+        // بنستخدم addEventListener بدل onclick عشان نضمن إنه يشتغل
+        openBtn.addEventListener('click', function() {
+            sidebar.classList.add('active'); 
+            overlay.classList.add('active');
+        });
+
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    }
+});
+</script>
 </body>
 </html>

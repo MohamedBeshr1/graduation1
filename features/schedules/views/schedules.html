@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المواعيد والقاعات - معاهد العبور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../../core/theme/variables.css">
+    <link rel="stylesheet" href="../../dashboard/css/dashboard.css">
+
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header text-center py-4">
+            <h4 class="fw-bold m-0 fs-5" style="color: var(--white);">نظام الخريجين</h4>
+        </div>
+        <nav class="sidebar-nav mt-3">
+            <a href="../../dashboard/views/instructor_dashboard.html"><i class="fas fa-home ms-2"></i> الرئيسية</a>
+            <a href="../../teams/views/teams.html"><i class="fas fa-users ms-2"></i> الفرق والطلاب</a>
+            <a href="../../schedules/views/schedules.html" class="active"><i class="fas fa-calendar-alt ms-2"></i> المواعيد والقاعات</a>
+            <a href="../../settings/views/settings.html"><i class="fas fa-cog ms-2"></i> الإعدادات</a>
+            <a href="../../landing/views/index.html" style="color: #ffc107;"><i class="fas fa-sign-out-alt ms-2"></i> خروج</a>
+        </nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <header class="main-header shadow-sm">
+        <div class="d-flex align-items-center">
+            <button class="btn-toggle" id="openSidebar"><i class="fas fa-bars"></i></button>
+            <h4 class="m-0 ms-3 fw-bold" style="color: var(--primary-color);">جدول المواعيد</h4>
+        </div>
+     <div class="user-profile fw-bold">
+    <span id="userNameDisplay">أ/ المعيد</span> 
+    <i class="fas fa-user-circle ms-2 text-primary fs-4"></i>
+</div>
+    </header>
+
+    <main class="content-area">
+        <div class="container-fluid">
+            <div class="card-custom shadow-sm p-4 bg-white rounded-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold m-0"><i class="fas fa-calendar-check text-primary ms-2"></i>تحديد مواعيد المناقشات والقاعات</h5>
+                    <button class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#addEventModal">
+                        <i class="fas fa-plus ms-1"></i> حجز موعد
+                    </button>
+                </div>
+                <div id="calendar" style="min-height: 600px;"></div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="addEventModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-0">
+                    <h5 class="fw-bold">حجز قاعة وموعد مناقشة</h5>
+                    <button type="button" class="btn-close ms-0" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 text-end">
+                    <form id="addEventForm">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">اسم الفريق</label>
+                            <select class="form-select rounded-3" id="teamSelect">
+                                <option>فريق النخبة</option>
+                                <option>كود العبور</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">القاعة</label>
+                            <input type="text" class="form-control rounded-3" placeholder="مثلاً: قاعة 101">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">التاريخ والوقت</label>
+                            <input type="datetime-local" class="form-control rounded-3">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 mt-3">تأكيد الحجز</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // اسحب الاسم المحفوظ وحطه في الـ span اللي واخد ID "userNameDisplay"
+const savedName = localStorage.getItem('userName');
+if (savedName) {
+    document.getElementById('userNameDisplay').innerText = savedName;
+}        // --- الجزء الخاص بتشغيل القائمة الجانبية (Sidebar Toggle) ---
+
+        const openBtn = document.getElementById('openSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        
+        if (openBtn && sidebar && overlay) {
+            openBtn.onclick = function() {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+            };
+
+            overlay.onclick = function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            };
+        }
+
+        // --- الجزء الخاص بالتقويم والفرق ---
+        const storedTeams = JSON.parse(localStorage.getItem('allTeams')) || [];
+        const teamSelect = document.getElementById('teamSelect');
+
+        // ملء القائمة المنسدلة بأسماء الفرق الحقيقية
+        if (teamSelect) {
+            teamSelect.innerHTML = storedTeams.map(team => 
+                `<option value="${team.id}">${team.name}</option>`
+            ).join('') || '<option>لا توجد فرق مسجلة</option>';
+        }
+
+        // تشغيل التقويم
+        var calendarEl = document.getElementById('calendar');
+        if (calendarEl) {
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'ar',
+                direction: 'rtl',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek'
+                },
+                events: storedTeams.map((team, index) => ({
+                    title: `مناقشة: ${team.name}`,
+                    // بنوزعهم أيام ورا بعض بشكل افتراضي
+                    start: new Date(new Date().setDate(new Date().getDate() + index)).toISOString().split('T')[0],
+                    backgroundColor: '#1e3a8a',
+                    borderColor: '#1e3a8a'
+                }))
+            });
+            calendar.render();
+        }
+    });
+</script>
+</body>
+</html>

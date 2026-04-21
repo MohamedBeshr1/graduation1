@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات - معاهد العبور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../../../core/theme/variables.css">
+    <link rel="stylesheet" href="../../dashboard/css/dashboard.css">
+</head>
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header text-center py-4">
+            <h4 class="fw-bold m-0 fs-5" style="color: var(--white);">نظام الخريجين</h4>
+            <small class="opacity-75 text-white">معاهد العبور العليا</small>
+        </div>
+        <nav class="sidebar-nav mt-3">
+            <a href="../../dashboard/views/instructor_dashboard.html"><i class="fas fa-home ms-2"></i> الرئيسية</a>
+            <a href="../../teams/views/teams.html"><i class="fas fa-users ms-2"></i> الفرق والطلاب</a>
+            <a href="../../schedules/views/schedules.html"><i class="fas fa-calendar-alt ms-2"></i> المواعيد والقاعات</a>
+            <a href="#" class="active"><i class="fas fa-cog ms-2"></i> الإعدادات</a>
+            <a href="../../landing/views/index.html" style="color: #ffc107;"><i class="fas fa-sign-out-alt ms-2"></i> خروج</a>
+        </nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <header class="main-header shadow-sm">
+        <div class="d-flex align-items-center">
+            <button class="btn-toggle" id="openSidebar"><i class="fas fa-bars"></i></button>
+            <h4 class="m-0 ms-3 fw-bold" style="color: var(--primary-color);">إعدادات النظام</h4>
+        </div>
+        <div class="user-profile fw-bold">
+            <span id="headerUserName">أ/ المعيد</span>
+            <i class="fas fa-user-circle ms-2 text-primary fs-4"></i>
+        </div>
+    </header>
+
+    <main class="content-area">
+        <div class="container-fluid">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card-custom shadow-sm p-4 bg-white rounded-4">
+                        <h5 class="fw-bold mb-4 text-primary border-bottom pb-2">
+                            <i class="fas fa-user-edit ms-2"></i>تعديل الملف الشخصي
+                        </h5>
+                        <form id="profileForm">
+                            <div class="mb-3 text-end">
+                                <label class="form-label small fw-bold">الاسم بالكامل</label>
+                                <input type="text" id="nameInput" class="form-control rounded-3" value="أ/ المعيد">
+                            </div>
+                            <div class="mb-3 text-end">
+                                <label class="form-label small fw-bold">كلمة المرور</label>
+                                <input type="password" class="form-control rounded-3" placeholder="********">
+                            </div>
+                            <button type="button" id="saveBtn" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
+                                حفظ التغييرات
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card-custom shadow-sm p-4 bg-white rounded-4 h-100">
+                        <h5 class="fw-bold mb-4 text-primary border-bottom pb-2">
+                            <i class="fas fa-tasks ms-2"></i>إعدادات المشاريع
+                        </h5>
+                        <div class="mb-3 text-end">
+                            <label class="form-label small fw-bold">السنة الدراسية</label>
+                            <select class="form-select rounded-3">
+                                <option>2025 / 2026</option>
+                                <option>2024 / 2025</option>
+                            </select>
+                        </div>
+                        <div class="form-check form-switch mb-3 d-flex justify-content-between flex-row-reverse p-0">
+                            <label class="form-check-label fw-bold small">فتح باب التسجيل</label>
+                            <input class="form-check-input" type="checkbox" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. القائمة الجانبية
+            const openBtn = document.getElementById('openSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            openBtn.onclick = () => { sidebar.classList.add('active'); overlay.classList.add('active'); };
+            overlay.onclick = () => { sidebar.classList.remove('active'); overlay.classList.remove('active'); };
+
+            // 2. معالجة الاسم (التخزين)
+            const saveBtn = document.getElementById('saveBtn');
+            const nameInput = document.getElementById('nameInput');
+            const headerUserName = document.getElementById('headerUserName');
+
+            // جلب الاسم المحفوظ عند فتح الصفحة
+            const savedName = localStorage.getItem('userName');
+            if (savedName) {
+                nameInput.value = savedName;
+                headerUserName.innerText = savedName;
+            }
+
+            // أكشن الحفظ
+            saveBtn.onclick = function() {
+                const newName = nameInput.value;
+                localStorage.setItem('userName', newName); // تخزين الاسم الجديد
+                
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+                
+                setTimeout(() => {
+                    this.innerHTML = 'تم الحفظ بنجاح <i class="fas fa-check"></i>';
+                    this.classList.replace('btn-primary', 'btn-success');
+                    headerUserName.innerText = newName; // تحديث الهيدر في الحال
+
+                    alert('تم تحديث بياناتك بنجاح');
+                    
+                    setTimeout(() => {
+                        this.innerHTML = 'حفظ التغييرات';
+                        this.classList.replace('btn-success', 'btn-primary');
+                    }, 2000);
+                }, 1000);
+            };
+        });
+    </script>
+</body>
+</html>

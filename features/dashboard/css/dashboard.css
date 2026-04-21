@@ -1,5 +1,3 @@
-/* features/dashboard/css/dashboard.css */
-
 body { 
     font-family: 'Cairo', sans-serif; 
     background-color: var(--accent-color); 
@@ -12,21 +10,19 @@ body {
 .sidebar {
     position: fixed;
     top: 0;
-    right: -280px; /* مخفي جهة اليمين في البداية */
+    right: -280px; 
     width: 280px;
     height: 100vh;
     background: var(--primary-color);
     color: var(--white);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition-smooth);
     z-index: 2000;
     box-shadow: -5px 0 15px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
 }
 
-.sidebar.active { 
-    right: 0; 
-}
+.sidebar.active { right: 0; }
 
 .sidebar-header {
     padding: 30px 20px;
@@ -47,10 +43,9 @@ body {
 
 .sidebar-nav a:hover, .sidebar-nav a.active {
     background: var(--secondary-color);
-    padding-right: 35px; /* حركة الـ Slide عند الـ Hover */
+    padding-right: 35px;
 }
 
-/* Overlay Style */
 .overlay {
     position: fixed;
     top: 0; left: 0;
@@ -59,11 +54,8 @@ body {
     display: none;
     z-index: 1500;
 }
-.overlay.active { 
-    display: block; 
-}
+.overlay.active { display: block; }
 
-/* Header & Content Area */
 .main-header {
     background: var(--white);
     padding: 15px 30px;
@@ -76,25 +68,6 @@ body {
     z-index: 1000;
 }
 
-.btn-toggle {
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: var(--transition-smooth);
-}
-
-.btn-toggle:hover {
-    background: var(--secondary-color);
-}
-
-.content-area { 
-    padding: 30px; 
-}
-
 .card-custom {
     background: var(--white);
     border-radius: 20px;
@@ -102,13 +75,28 @@ body {
     box-shadow: var(--shadow-sm);
     border: none;
 }
-
-/* FullCalendar Customization (عشان يليق مع الثيم) */
-.fc .fc-button-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
+/* زرار القائمة الجانبية - رجعناه للأزرق الأصلي */
+.btn-toggle {
+    background-color: var(--primary-color) !important; /* اللون الأزرق الأساسي */
+    color: var(--white) !important; /* لون الأيقونة أبيض */
+    border: none !important;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-sm); /* ظل خفيف عشان يبرز */
 }
-.fc .fc-button-primary:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
+
+.btn-toggle:hover {
+    background-color: var(--secondary-color) !important; /* يفتح سنة عند الوقوف عليه */
+    transform: scale(1.05); /* حركة خفيفة */
+}
+
+/* التأكد من لون الأيقونة جوه الزرار */
+.btn-toggle i {
+    color: #ffffff !important;
 }
