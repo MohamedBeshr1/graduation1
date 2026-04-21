@@ -81,3 +81,22 @@ features\landing\assets\1630661401477.jpg
     font-size: 22px;
     margin-bottom: 20px;
 }
+/*اخر جزء*/
+    .hover-effect { transition: all 0.3s ease; border: 1px solid #ddd; }
+    .hover-effect:hover { 
+        transform: translateY(-5px); 
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        border-color: #004085;
+    }
+    /* تنسيق بسيط عشان الزرار يفضل واخد ستايل اللاندينج بتاعك */
+    .nav-auth-btn {
+        background-color: #004085;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    .modal-header .btn-close {
+    margin: 0; /* بيشيل أي مسافات قديمة */
+    margin-right: auto; /* بيزق الزرار لأقصى الشمال في حالة الـ RTL */
+}
