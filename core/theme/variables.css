@@ -1,10 +1,135 @@
-:root {
-    --primary-color: #004085;    
-    --secondary-color: #007bff; 
-    --accent-color: #e7f1ff;     
-    --text-main: #333;
-    --white: #ffffff;
-    --shadow-sm: 0 2px 10px rgba(0,0,0,0.05);
-    --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+/* --- تنسيق الـ Navbar الأساسي --- */
+nav {
+    background-color: #1e3a8a !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --- تنسيق اللينكات (الرئيسية، الأهداف، إلخ) - نصوص حرة بيضاء --- */
+nav a,
+.nav-link,
+.navbar-brand {
+    color: #ffffff !important;
+    background: none !important;
+    /* حذف أي خلفية مستطيلة */
+    background-color: transparent !important;
+    border: none !important;
+    /* حذف أي حدود */
+    box-shadow: none !important;
+    /* حذف أي ضل */
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-decoration: none;
+    margin: 0 15px;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+    /* شفافية بسيطة وهي عادية */
+}
+
+/* تأثير الـ Hover للينكات العادية عشان متختفيش */
+nav a:hover,
+.nav-link:hover {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    /* الكلمة بتنور أبيض أكتر */
+    background: none !important;
+}
+
+/* --- زرار تسجيل الدخول (المستطيل الأبيض البرنس) --- */
+/* سبتهولك زي ما هو بالظبط بلونه وشكله المميز */
+.nav-auth-btn,
+a[href*="login"],
+.nav-link.btn-login {
+    background-color: #ffffff !important;
+    /* المستطيل الأبيض */
+    color: #1e4472 !important;
+    /* لون النص أزرق غامق */
+    border: 2px solid #ffffff !important;
+    border-radius: 10px !important;
+    /* حواف دائرية */
+    padding: 8px 25px !important;
+    font-weight: 800 !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease-in-out !important;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.nav-auth-btn:hover,
+a[href*="login"]:hover {
+    background-color: #3b82f6 !important;
+    /* بيقلب أزرق لما تقف عليه */
+    color: #ffffff !important;
+    border-color: #3b82f6 !important;
+    transform: translateY(-2px);
+    /* حركة بسيطة لفوق */
+}
+
+/* --- تنسيقات الهيرو (Hero Section) --- */
+.hero-content {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%) !important;
+    border-radius: 30px !important;
+    box-shadow: 0 15px 35px rgba(30, 58, 138, 0.2) !important;
+    padding: 60px 20px !important;
+    margin: 40px auto !important;
+}
+
+h1,
+.hero-title {
+    color: #ffffff !important;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+p.hero-description {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+}
+
+/* --- أزرار الاكتشاف والرؤية --- */
+.btn-discover,
+.btn-vision {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 10px !important;
+    padding: 12px 30px !important;
+    font-weight: 700 !important;
+    transition: all 0.3s ease;
+}
+
+.btn-discover:hover,
+.btn-vision:hover {
+    background-color: #ffffff !important;
+    color: #1e3a8a !important;
+}
+
+/* تعديل العناوين عشان تبان في الصفحات الفاتحة */
+.about-section h1,
+.vision-section h1,
+.goals-section h1 {
+    color: #1e3a8a !important;
+    /* اللون الأزرق الغامق عشان يظهر */
+}
+
+/* 1. توحيد حجم اسم المشروع */
+.navbar-brand {
+    font-size: 1.5rem !important;
+    font-weight: 800 !important;
+}
+
+
+/* 3. الخط اللي تحت الصفحة النشطة (طلب البشمهندس) */
+nav a.active {
+    border-bottom: 3px solid #ffffff !important;
+    padding-bottom: 5px;
+    opacity: 1 !important;
 }

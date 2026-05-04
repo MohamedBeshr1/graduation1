@@ -1,91 +1,281 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <title>لوحة تحكم الطالب | FMS</title>
-    <link href="https://cdn.npmmirror.com/bootstrap/5.3.0/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الطالب | نظام مشاريع العبور</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        :root { --primary-blue: #004085; --bg-gray: #f4f7f6; }
-        body { background-color: var(--bg-gray); font-family: 'Segoe UI', Tahoma, sans-serif; }
-        .stat-card { border: none; border-radius: 15px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .stat-card:hover { transform: translateY(-5px); }
-        .project-progress { background: white; border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+        :root {
+            --bg: #f4f7fe;
+            /* خلفية فاتحة هادية */
+            --sidebar-bg: #1e3a8a;
+            /* كحلي المعهد */
+            --glass: #ffffff;
+            --text-main: #1e293b;
+            --accent: #3b82f6;
+            --purple: #8b5cf6;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* كارت الـ Glass المعدل للـ Light Mode */
+        .glass {
+            background: var(--glass);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .glass:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            right: 0;
+            top: 0;
+            padding: 40px 20px;
+            z-index: 1000;
+            background: var(--sidebar-bg);
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h3 {
+            color: white;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-weight: bold;
+        }
+
+        .main-content {
+            margin-right: 280px;
+            padding: 40px;
+        }
+
+        .task-status {
+            background: #f8fafc;
+            border-right: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .table-glass {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+
+        .table-glass tr {
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+
+        .table-glass td {
+            padding: 15px;
+            color: var(--text-main);
+        }
+
+        .table-glass td:first-child {
+            border-radius: 0 12px 12px 0;
+            border: 1px solid #eee;
+            border-left: none;
+        }
+
+        .table-glass td:last-child {
+            border-radius: 12px 0 0 12px;
+            border: 1px solid #eee;
+            border-right: none;
+        }
+
+        .progress {
+            background: #e2e8f0 !important;
+        }
+
+        .badge {
+            font-weight: 600;
+            padding: 8px 12px;
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                margin: 0;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-<div class="container py-5">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
-            <h2 class="fw-bold text-primary">لوحة تحكم الطالب</h2>
-            <p class="text-muted">نظام إدارة مشاريع التخرج - معهد العبور</p>
+    <aside class="sidebar">
+        <div class="text-center mb-5">
+            <h3 class="fw-900">نظام المشاريع</h3>
+            <small style="color: #60a5fa">بوابة الطالب </small>
         </div>
-        <div class="text-end">
-            <span class="badge bg-primary p-2">فريق رقم 104</span>
-        </div>
-    </div>
+        <nav>
+            <a href="student_dashboard.html" class="nav-link active"><i class="fas fa-home ms-2"></i> الرئيسية</a>
+            <a href="masseges.html" class="nav-link"><i class="fas fa-envelope ms-2"></i> الرسائل</a>
+            <a href="my-team.html" class="nav-link"><i class="fas fa-users ms-2"></i> فريقي</a>
+            <a href="assignments.html" class="nav-link"><i class="fas fa-cloud-upload ms-2"></i> تسليم المهام</a>
+            <a href="../../landing/views/index.html" class="nav-link text-warning mt-5"><i
+                    class="fas fa-power-off ms-2"></i> خروج</a>
+        </nav>
+    </aside>
 
-    <div class="row g-4 mb-4">
-        <div class="col-md-4">
-            <div class="card stat-card p-3 bg-white border-start border-primary border-5">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="text-muted">المشرف الأكاديمي</h6>
-                        <h5 class="fw-bold mb-0">د. محمد علي</h5>
+    <main class="main-content">
+        <header class="d-flex justify-content-between align-items-center mb-5" data-aos="fade-down">
+            <div>
+                <h2 class="fw-900 m-0" style="color: var(--sidebar-bg);">أهلاً، محمد بشر 👋</h2>
+                <p class="text-muted">مشروع: نظام إدارة التخرج الذكي</p>
+            </div>
+            <div class="glass p-2 px-3 d-flex align-items-center gap-3 rounded-pill">
+                <i class="fas fa-bell text-primary"></i>
+                <div class="vr"></div>
+                <img src="https://ui-avatars.com/api/?name=Mohamed+Beshr&background=1e3a8a&color=fff" width="40"
+                    class="rounded-circle shadow-sm">
+            </div>
+        </header>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="glass p-4 text-center">
+                    <h6 class="text-muted mb-3">نسبة إنجاز المشروع</h6>
+                    <div class="progress" style="height: 12px; border-radius: 20px;">
+                        <div class="progress-bar bg-primary" style="width: 75%; border-radius: 20px;"></div>
                     </div>
-                    <i class="fas fa-user-tie fa-2x text-primary opacity-50"></i>
+                    <h3 class="mt-3 fw-900 text-primary">75%</h3>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="glass p-4 text-center">
+                    <h6 class="text-muted mb-3">المهام التي تم تسليمها</h6>
+                    <h2 class="fw-900 text-success">12</h2>
+                    <small class="text-muted">مهمة مكتملة</small>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="glass p-4 text-center">
+                    <h6 class="text-muted mb-3">متبقي على المناقشة</h6>
+                    <h2 class="fw-900 text-danger">14 يوم</h2>
+                    <small class="text-muted">بالتوفيق!</small>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card stat-card p-3 bg-white border-start border-success border-5">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="text-muted">حالة التسليم</h6>
-                        <h5 class="fw-bold mb-0">تم اعتماد الفكرة</h5>
+
+        <div class="row g-4">
+            <div class="col-lg-8" data-aos="fade-up">
+                <div class="glass p-4 h-100">
+                    <h5 class="fw-bold mb-4" style="color: var(--sidebar-bg);"><i class="fas fa-history ms-2"></i>سجل
+                        التسليمات الأخيرة</h5>
+
+                    <div class="table-responsive">
+                        <table class="table-glass">
+                            <thead>
+                                <tr class="text-muted small">
+                                    <td>اسم الملف</td>
+                                    <td>التاريخ</td>
+                                    <td>الحالة</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-600">Final_Documentation.pdf</td>
+                                    <td>25/04/2026</td>
+                                    <td><span class="badge bg-success-subtle text-success border border-success">تم
+                                            القبول</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-600">Frontend_Source_Code.zip</td>
+                                    <td>20/04/2026</td>
+                                    <td><span class="badge bg-warning-subtle text-warning border border-warning">تحت
+                                            المراجعة</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-600">Database_Schema.sql</td>
+                                    <td>15/04/2026</td>
+                                    <td><span class="badge bg-success-subtle text-success border border-success">تم
+                                            القبول</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <i class="fas fa-check-double fa-2x text-success opacity-50"></i>
+                </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-right">
+                <div class="glass p-4 h-100">
+                    <h5 class="fw-bold mb-4" style="color: var(--sidebar-bg);"><i
+                            class="fas fa-list-check ms-2"></i>المطلوب تسليمه</h5>
+
+                    <div class="task-status">
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold">الرسم الهندسي (UML)</span>
+                            <span class="badge bg-danger">هام</span>
+                        </div>
+                        <small class="text-muted">الموعد النهائي: 30 أبريل</small>
+                    </div>
+
+                    <div class="task-status" style="border-color: var(--purple);">
+                        <div class="d-flex justify-content-between">
+                            <span class="fw-bold">ربط الـ API بالـ UI</span>
+                            <span class="badge bg-warning text-dark">قيد التنفيذ</span>
+                        </div>
+                        <small class="text-muted">الموعد النهائي: 5 مايو</small>
+                    </div>
+
+                    <div class="p-3 mt-4 text-center rounded-3 shadow-sm"
+                        style="background: #fff9db; border: 1px solid #ffe066;">
+                        <i class="fas fa-quote-right mb-2 text-warning fs-4"></i>
+                        <p class="small m-0 fw-600">"يرجى مراجعة الـ Validation في صفحة اللوجين قبل العرض القادم."</p>
+                        <small class="text-primary d-block mt-2 fw-bold">- د. محمد علي</small>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card stat-card p-3 bg-white border-start border-warning border-5">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="text-muted">الموعد القادم</h6>
-                        <h5 class="fw-bold mb-0">تسليم الـ ERD</h5>
-                    </div>
-                    <i class="fas fa-clock fa-2x text-warning opacity-50"></i>
-                </div>
-            </div>
-        </div>
-    </div>
+    </main>
 
-    <div class="project-progress shadow-sm">
-        <div class="d-flex justify-content-between mb-2">
-            <h6 class="fw-bold">نسبة إكمال المشروع</h6>
-            <span class="fw-bold text-primary">45%</span>
-        </div>
-        <div class="progress" style="height: 15px; border-radius: 10px;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 45%;"></div>
-        </div>
-    </div>
-
-    <div class="card border-0 shadow-sm p-4 text-center mb-4">
-        <h5 class="fw-bold mb-3">رفع ملفات المهمة الحالية</h5>
-        <div class="p-5 border-2 border-dashed rounded-3 bg-light" style="border: 2px dashed #ccc;">
-            <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
-            <p>اسحب الملفات هنا أو اضغط للاختيار</p>
-            <input type="file" class="form-control w-50 mx-auto">
-            <button class="btn btn-primary mt-3 px-5">رفع الآن</button>
-        </div>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-
-<script src="../viewmodels/dashboard_viewmodel.js"></script>
-
-<script src="../viewmodels/dashboard_student_vm.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
 </body>
+
 </html>

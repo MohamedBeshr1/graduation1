@@ -1,92 +1,328 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="appHtml">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة تحكم المعيد - معاهد العبور</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="../../../core/theme/variables.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
-</head>
-<body>
 
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header text-center py-4">
-            <h4 class="fw-bold m-0 fs-5" style="color: var(--white);">نظام الخريجين</h4>
-            <small class="opacity-75 text-white">معاهد العبور العليا</small>
-        </div>
-        <nav class="sidebar-nav mt-3">
-            <a href="#" class="active"><i class="fas fa-home ms-2"></i> الرئيسية</a>
-            <a href="../../teams/views/teams.html"><i class="fas fa-users ms-2"></i> الفرق والطلاب</a>
-            <a href="../../schedules/views/schedules.html"><i class="fas fa-calendar-alt ms-2"></i> المواعيد والقاعات</a>
-            <a href="../../settings/views/settings.html"><i class="fas fa-cog ms-2"></i> الإعدادات</a>
-            <a href="../../landing/views/index.html" style="color: #ffc107;"><i class="fas fa-sign-out-alt ms-2"></i> خروج</a>
-        </nav>
-    </aside>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet"
+        id="bootstrapLink">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #8b5cf6;
+            --secondary-color: #3b82f6;
+            --bg-dark: #030712;
+            --card-glass: rgba(255, 255, 255, 0.03);
+            --sidebar-width: 280px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .light-theme {
+            --bg-dark: #f1f5f9;
+            --card-glass: #ffffff;
+            --text-main: #0f172a;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #f8fafc;
+            font-family: 'Cairo', sans-serif;
+            transition: var(--transition);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .light-theme body {
+            color: #0f172a;
+        }
+
+        /* Sidebar Magic */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            right: 0;
+            top: 0;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1050;
+            transition: var(--transition);
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: 0.3s;
+            border-radius: 15px;
+            margin: 5px 15px;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .main-wrapper {
+            margin-right: var(--sidebar-width);
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .main-header {
+            background: var(--card-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 15px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .fc {
+            background: var(--card-glass);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .fc-header-toolbar {
+            margin-bottom: 2rem !important;
+        }
+
+        .fc-daygrid-day:hover {
+            background: rgba(139, 92, 246, 0.05) !important;
+            cursor: pointer;
+        }
+
+        .fc-button-primary {
+            background: var(--primary-color) !important;
+            border: none !important;
+            border-radius: 10px !important;
+        }
+
+        .stat-card {
+            background: var(--card-glass);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                right: -100%;
+            }
+
+            .sidebar.active {
+                right: 0;
+            }
+
+            .main-wrapper {
+                margin-right: 0;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
 
     <div class="overlay" id="overlay"></div>
 
-    <header class="main-header shadow-sm">
-        <div class="d-flex align-items-center">
-            <button class="btn-toggle" id="openSidebar">
-                <i class="fas fa-bars"></i>
-            </button>
-            <h4 class="m-0 ms-3 fw-bold" style="color: var(--primary-color);">لوحة التحكم</h4>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header text-center py-5">
+            <div class="bg-primary d-inline-block p-2 rounded-3 mb-2 shadow-lg">
+                <i class="fas fa-graduation-cap text-white fs-3"></i>
+            </div>
+            <h4 class="fw-900 m-0 text-white" id="t-sys-name">نظام الخريجين</h4>
+            <small class="opacity-50 text-white" id="t-inst">معاهد العبور العليا</small>
         </div>
-        <div class="user-profile fw-bold">
-            <span id="userName">جاري التحميل...</span> 
-            <i class="fas fa-user-circle ms-2 text-primary fs-4"></i>
-        </div>
-    </header>
+        <nav class="sidebar-nav">
+            <a href="../../dashboard/views/instructor_dashboard.html" class="active"><i class="fas fa-home ms-3"></i> <span id="t-home">الرئيسية</span></a>
+            <a href="../../teams/views/teams.html"><i class="fas fa-users ms-3"></i> <span id="t-teams">الفرق
+                    والطلاب</span></a>
+            <a href="../../schedules/views/schedules.html"><i class="fas fa-calendar-alt ms-3"></i> <span id="t-sched">المواعيد والقاعات</span></a>
+            <a href="../../dashboard/views/statistics.html"><i class="fas fa-chart-pie ms-3"></i> <span id="t-stats">الإحصائيات</span></a>
+            <a href="../../landing/views/index.html" style="margin-top: 50px; color: #ff4757;"><i
+                    class="fas fa-sign-out-alt ms-3"></i> <span id="t-out">خروج</span></a>
+        </nav>
+    </aside>
 
-    <main class="content-area">
-        <div class="container-fluid">
-            <div class="card-custom shadow-sm p-4 bg-white rounded-4">
-                <h5 class="fw-bold mb-4">
-                    <i class="fas fa-calendar-alt text-primary ms-2"></i>جدول المواعيد والقاعات
-                </h5>
-                <div id="calendar"></div>
+    <div class="main-wrapper">
+        <header class="main-header" data-aos="fade-down">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-outline-light border-0 d-lg-none me-3" id="openSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div>
+                    <h5 class="m-0 fw-bold" id="t-welcome">لوحة التحكم</h5>
+                    <small class="text-muted" id="t-date">أهلاً بك مرة أخرى، مهندس</small>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="toggleLang()"
+                    id="langBtn">EN</button>
+                <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="toggleTheme()"><i
+                        class="fas fa-moon"></i></button>
+                <div class="user-profile ms-3 d-flex align-items-center gap-2">
+                    <span class="fw-bold d-none d-md-block" id="userName">جاري التحميل...</span>
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=8b5cf6&color=fff"
+                        class="rounded-pill border border-2 border-primary" width="40">
+                </div>
+            </div>
+        </header>
+
+        <div class="row g-4 mb-4" data-aos="fade-up">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <small class="text-muted" id="t-st1">الفرق النشطة</small>
+                    <h3 class="fw-900 m-0 text-primary">24</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <small class="text-muted" id="t-st2">القاعات المحجوزة</small>
+                    <h3 class="fw-900 m-0 text-info">12</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <small class="text-muted" id="t-st3">طلبات المراجعة</small>
+                    <h3 class="fw-900 m-0 text-warning">8</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <small class="text-muted" id="t-st4">نسبة الإنجاز</small>
+                    <h3 class="fw-900 m-0 text-success">75%</h3>
+                </div>
             </div>
         </div>
-    </main>
+
+        <div class="glass-card shadow-sm p-4 rounded-4" data-aos="fade-up" data-aos-delay="200">
+            <h5 class="fw-bold mb-4 d-flex align-items-center justify-content-between">
+                <span><i class="fas fa-calendar-check text-primary ms-2"></i> <span id="t-cal-h">جدول المواعيد
+                        والقاعات</span></span>
+                <button class="btn btn-sm btn-primary rounded-pill px-3"><i class="fas fa-plus me-1"></i> حجز
+                    جديد</button>
+            </h5>
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. استرجاع الاسم
-    const savedName = localStorage.getItem('userName');
-    if (savedName) {
-        document.getElementById('userName').innerText = savedName;
-    }
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init();
 
-    // 2. كود الزرار (الأهم)
-    const openBtn = document.getElementById('openSidebar');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                locale: 'ar',
+                direction: 'rtl',
+                events: [
+                    { title: 'مناقشة فريق 104', start: '2026-04-25', color: '#8b5cf6' },
+                    { title: 'مراجعة قاعة 402', start: '2026-04-27', color: '#3b82f6' }
+                ]
+            });
+            calendar.render();
 
-    if(openBtn && sidebar && overlay) {
-        // بنستخدم addEventListener بدل onclick عشان نضمن إنه يشتغل
-        openBtn.addEventListener('click', function() {
-            sidebar.classList.add('active'); 
-            overlay.classList.add('active');
+            const openBtn = document.getElementById('openSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            openBtn.addEventListener('click', () => {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            const savedName = localStorage.getItem('userName') || "مهندس الإدارة";
+            document.getElementById('userName').innerText = savedName;
         });
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+        }
+        let lang = 'ar';
+        const d = {
+            ar: {
+                sys: "نظام الخريجين", inst: "معاهد العبور العليا", home: "الرئيسية",
+                teams: "الفرق والطلاب", sched: "المواعيد والقاعات", stats: "الإحصائيات",
+                out: "خروج", welcome: "لوحة التحكم", st1: "الفرق النشطة", calH: "جدول المواعيد والقاعات", btn: "EN"
+            },
+            en: {
+                sys: "Graduates System", inst: "Obour Institutes", home: "Home",
+                teams: "Teams & Students", sched: "Schedules", stats: "Statistics",
+                out: "Logout", welcome: "Dashboard", st1: "Active Teams", calH: "Schedule & Rooms", btn: "AR"
+            }
+        };
 
-        overlay.addEventListener('click', function() {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-    }
-});
-</script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+        function toggleLang() {
+            lang = lang === 'ar' ? 'en' : 'ar';
+            const t = d[lang];
+            document.getElementById('t-sys-name').innerText = t.sys;
+            document.getElementById('t-inst').innerText = t.inst;
+            document.getElementById('t-home').innerText = t.home;
+            document.getElementById('t-teams').innerText = t.teams;
+            document.getElementById('t-sched').innerText = t.sched;
+            document.getElementById('t-stats').innerText = t.stats;
+            document.getElementById('t-out').innerText = t.out;
+            document.getElementById('t-welcome').innerText = t.welcome;
+            document.getElementById('t-st1').innerText = t.st1;
+            document.getElementById('t-cal-h').innerText = t.calH;
+            document.getElementById('langBtn').innerText = t.btn;
 
-<script src="../viewmodels/dashboard_viewmodel.js"></script>
-
-<script src="../viewmodels/dashboard_student_vm.js"></script>
+            document.getElementById('appHtml').dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('bootstrapLink').href = lang === 'ar' ?
+                "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" :
+                "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css";
+        }
+    </script>
 </body>
+
 </html>

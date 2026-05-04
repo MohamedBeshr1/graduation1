@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل الطالب | FMS</title>
+    <title>دليل الطالب |GPMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../core/theme/variables.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg custom-navbar sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="index.html" style="color: var(--primary-color);">FMS | AL OBOUR</a>
+            <a class="navbar-brand fw-bold fs-3" href="index.html" style="color: var(--primary-color);">Obour Smart
+                |GPMS</a>
             <div class="collapse navbar-collapse" id="guideNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">عن المشروع</a></li>
-                    <li class="nav-item"><a class="nav-link" href="vision.html">الرؤية والأهداف</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vision.html">الاهداف</a></li>
                     <li class="nav-item"><a class="nav-link active text-primary" href="guide.html">دليل الطالب</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../landing/views/our vision.html"> اكتشف
+                            الرؤيه</a></li>
+
                 </ul>
-                <a href="../../auth/views/login.html" class="nav-auth-btn">دخول النظام</a>
+                <button type="button" class="btn fw-bold" data-bs-toggle="modal" data-bs-target="#loginChoiceModal"
+                    style="background-color: #ffffff !important; 
+               color: #1e4472 !important; 
+               border: none !important;
+               border-radius: 10px !important; 
+               padding: 8px 25px !important; 
+               font-size: 1rem !important; 
+               box-shadow: 0 4px 15px rgba(255,255,255,0.4) !important;">
+                    تسجيل الدخول
+                </button>
+                </button>
             </div>
         </div>
     </nav>
@@ -29,29 +47,98 @@
         <div class="container py-5 text-center">
             <h2 class="display-6 fw-bold mb-5" style="color: var(--primary-color);">كيفية استخدام النظام</h2>
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="feature-card shadow-sm p-4">
-                        <div class="badge bg-primary rounded-circle p-3 mb-3 mx-auto" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">1</div>
-                        <h5 class="fw-bold">إنشاء الحساب</h5>
-                        <p class="text-muted small">سجل بياناتك الشخصية والأكاديمية باستخدام الكود الجامعي المعتمد.</p>
+                <!-- 1. إنشاء الحساب -->
+                <div class="col-md-3">
+                    <div class="feature-card shadow-sm p-4 h-100">
+                        <div class="badge bg-primary rounded-circle p-3 mb-3 mx-auto"
+                            style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                            1</div>
+                        <h5 class="fw-bold" style="color: #004085;">إنشاء الحساب</h5>
+                        <p style="color: #2c3e50; font-weight: 600;" class="small">سجل بياناتك الشخصية باستخدام الكود
+                            الجامعي لتفعيل حسابك على المنصة.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="feature-card shadow-sm p-4">
-                        <div class="badge bg-primary rounded-circle p-3 mb-3 mx-auto" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">2</div>
-                        <h5 class="fw-bold">رفع المشروع</h5>
-                        <p class="text-muted small">ارفع ملفات مشروعك بصيغة (ZIP/RAR) مع إضافة وصف مختصر لفكرتك.</p>
+
+                <!-- 2. الفريق والفكرة -->
+                <div class="col-md-3">
+                    <div class="feature-card shadow-sm p-4 h-100">
+                        <div class="badge bg-primary rounded-circle p-3 mb-3 mx-auto"
+                            style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                            2</div>
+                        <h5 class="fw-bold" style="color: #004085;">الفريق والفكرة</h5>
+                        <p style="color: #2c3e50; font-weight: 600;" class="small">تكوين فريق العمل وتحديد اسم المشروع
+                            وإرسال المقترح الأولي للموافقة عليه.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="feature-card shadow-sm p-4">
-                        <div class="badge bg-primary rounded-circle p-3 mb-3 mx-auto" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">3</div>
-                        <h5 class="fw-bold">متابعة التقييم</h5>
-                        <p class="text-muted small">تابع ملاحظات المشرفين وحالة القبول أو التعديل مباشرة من لوحة التحكم.</p>
+
+                <!-- 3. رفع المشروع (التعديل اللي طلبتيه) -->
+                <div class="col-md-3">
+                    <div class="feature-card shadow-sm p-4 h-100">
+                        <div class="badge bg-primary rounded-circle p-3 mb-3 mx-auto"
+                            style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                            3</div>
+                        <h5 class="fw-bold" style="color: #004085;">رفع وتسليم المشروع</h5>
+                        <p style="color: #2c3e50; font-weight: 600;" class="small">ارفع ملفات مشروعك بصيغة (Zip/Rar) مع
+                            إضافة وصف مختصر لفكرتك والتقنيات المستخدمة.</p>
+                    </div>
+                </div>
+
+                <!-- 4. متابعة التقييم -->
+                <div class="col-md-3">
+                    <div class="feature-card shadow-sm p-4 h-100">
+                        <div class="badge bg-primary rounded-circle p-3 mb-3 mx-auto"
+                            style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                            4</div>
+                        <h5 class="fw-bold" style="color: #004085;">متابعة التقييم</h5>
+                        <p style="color: #2c3e50; font-weight: 600;" class="small">متابعة ملاحظات المشرفين دورياً وحالة
+                            القبول النهائي للمشروع عبر لوحة التحكم.</p>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+        </div>
     </section>
+    <div class="modal fade" id="loginChoiceModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border-radius: 15px; border: none;">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">هل أنت</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <a href="../../auth/views/login.html?role=student" class="text-decoration-none text-dark">
+                            <div class="card h-100 text-center p-3 border-info hover-effect">
+                                <<i class="fas fa-user-graduate fa-3x mb-3 text-primary"></i>
+                                    <h6 class="fw-bold">طالب</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="../../auth/views/login.html?role=instructor" class="text-decoration-none text-dark">
+                            <div class="card h-100 text-center p-3 border-info hover-effect">
+                                <i class="fas fa-user-tie fa-3x mb-3 text-info"></i>
+                                <h6 class="fw-bold">دكتور</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="../../auth/views/login.html?role=assistant" class="text-decoration-none text-dark">
+                            <div class="card h-100 text-center p-3 border-info hover-effect">
+                                <i class="fas fa-user-tie fa-3x mb-3 text-info"></i>
+                                <h6 class="fw-bold">معيد</h6>
+                            </div>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام التنبيهات | Assistent</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root {
+            --dark-body: #020617;
+            --glass-card: rgba(30, 41, 59, 0.7);
+            --accent-blue: #3b82f6;
+            --text-vivid: #ffffff;
+            --danger-red: #ef4444;
+        }
+
+        body {
+            background-color: var(--dark-body);
+            background-image: radial-gradient(circle at top right, #1e293b 0%, #020617 100%);
+            font-family: 'Cairo', sans-serif;
+            color: var(--text-vivid);
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-link-admin {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 14px 25px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: 0.3s;
+            margin: 5px 15px;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        .nav-link-admin.active {
+            background: var(--accent-blue) !important;
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .main-content {
+            margin-right: 280px;
+            padding: 40px;
+        }
+
+        /* ستايل كارت التأخير الأحمر */
+        .alert-card {
+            background: var(--glass-card);
+            border-radius: 20px;
+            padding: 20px;
+            border-right: 5px solid var(--accent-blue);
+            margin-bottom: 20px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .alert-card.overdue {
+            border-right-color: var(--danger-red);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        .deadline-timer {
+            background: linear-gradient(45deg, #1e293b, #0f172a);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--accent-blue);
+            margin-bottom: 30px;
+        }
+
+        .timer-unit {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--accent-blue);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            padding: 12px;
+        }
+
+        .btn-urgent {
+            background: var(--danger-red);
+            color: white;
+            border-radius: 10px;
+            font-weight: 700;
+            border: none;
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 992px) {
+            .admin-sidebar {
+                right: -280px;
+            }
+
+            .main-content {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="admin-sidebar">
+        <div class="text-center py-5">
+            <h3 class="fw-900 text-white">Assistent<span class="text-info"></span></h3>
+            <span class="badge bg-primary">نظام إدارة العبور</span>
+        </div>
+        <nav id="sidebar-nav">
+            <a href="../../dashboard/views/generalstatistics.html" class="nav-link-Assistent"><i
+                    class="fas fa-chart-pie ms-2"></i> الإحصائيات العامة</a>
+            <a href="../../dashboard/views/admin_dashboard.html" class="nav-link-Assistent"><i
+                    class="fas fa-tasks ms-2"></i> متابعة الفرق</a>
+            <a href="../../dashboard/views/review.html" class="nav-link-Assistent"><i class="fas fa-book-open ms-2"></i>
+                مراجعة التعليمات</a>
+            <a href="../../dashboard/views/statistics.html" class="nav-link-Assistent"><i
+                    class="fas fa-database ms-2"></i> تسجيل الاجتماعات</a>
+            <a href="../../dashboard/views/alerts.html" class="nav-link-Assistent"><i
+                    class="fas fa-exclamation-triangle ms-2"></i> التنبيهات</a>
+            <a href="../../landing/views/index.html" class="nav-link-Assistenttext-danger mt-5"><i
+                    class="fas fa-sign-out-alt ms-2"></i> خروج النظام</a>
+        </nav>
+    </aside>
+
+    <div class="main-content">
+        <div class="deadline-timer" data-aos="zoom-in">
+            <h5 class="mb-3 text-secondary">الموعد النهائي لتسليم المرحلة القادمة</h5>
+            <div class="d-flex justify-content-center gap-4">
+                <div>
+                    <div class="timer-unit" id="days">02</div><small>يوم</small>
+                </div>
+                <div>
+                    <div class="timer-unit" id="hours">14</div><small>ساعة</small>
+                </div>
+                <div>
+                    <div class="timer-unit" id="minutes">45</div><small>دقيقة</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-5 mb-4" data-aos="fade-right">
+                <div class="p-4"
+                    style="background: var(--glass-card); border-radius: 25px; border: 1px solid rgba(255,255,255,0.1);">
+                    <h4 class="fw-bold mb-4 text-white"><i class="fas fa-bell me-2 text-warning"></i> إرسال تنبيه رسمي
+                    </h4>
+                    <div class="mb-3">
+                        <label class="form-label text-secondary">اختيار الفريق:</label>
+                        <select id="targetTeam" class="form-control">
+                            <option>جميع الفرق</option>
+                            <option>فريق الصقور (CS)</option>
+                            <option>فريق النجوم (IS)</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label text-secondary">نص الرسالة:</label>
+                        <textarea id="alertText" class="form-control" rows="4"
+                            placeholder="اكتب التنبيه هنا..."></textarea>
+                    </div>
+                    <button onclick="broadcastAlert()" class="btn btn-primary w-100 py-3 fw-bold rounded-pill">بث
+                        التنبيه للطلاب</button>
+                </div>
+            </div>
+
+            <div class="col-lg-7" data-aos="fade-left">
+                <h4 class="fw-bold mb-4 text-white">حالة التزام الفرق <span class="badge bg-danger ms-2"
+                        style="font-size: 0.8rem;">تنبيهات تلقائية</span></h4>
+                <div id="alertsList">
+
+                    <div class="alert-card overdue">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-danger mb-2"><i class="fas fa-clock ms-1"></i> متأخر عن
+                                    الموعد</span>
+                                <h6 class="fw-bold m-0 text-white">فريق الصقور (مشروع AI)</h6>
+                                <p class="small text-light mt-2 m-0">لم يتم رفع ملفات "تحليل المتطلبات" حتى الآن!</p>
+                            </div>
+                            <button class="btn btn-urgent shadow" onclick="quickMessage('فريق الصقور')">
+                                <i class="fas fa-envelope ms-1"></i> تنبيه سريع
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="alert-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="badge bg-success mb-2">ملتزم</span>
+                                <h6 class="fw-bold m-0 text-white">فريق النجوم (Web App)</h6>
+                                <p class="small text-secondary mt-2 m-0">تم رفع جميع الملفات المطلوبة في الموعد.</p>
+                            </div>
+                            <i class="fas fa-check-circle text-success fa-2x"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000 });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const currentPage = window.location.pathname.split("/").pop();
+            document.querySelectorAll('.nav-link-admin').forEach(link => {
+                if (currentPage === link.getAttribute('href').split("/").pop()) link.classList.add('active');
+            });
+        });
+
+
+        function broadcastAlert() {
+            const text = document.getElementById('alertText').value;
+            const target = document.getElementById('targetTeam').value;
+            if (!text.trim()) { Swal.fire('خطأ', 'أدخل نص التنبيه', 'error'); return; }
+
+            Swal.fire('تم الإرسال!', `تم إبلاغ ${target} بنجاح.`, 'success');
+            document.getElementById('alertText').value = "";
+        }
+
+
+        function quickMessage(teamName) {
+            Swal.fire({
+                title: `تنبيه سريع لـ ${teamName}`,
+                text: 'هل تريد إرسال "إنذار أخير" لهذا الفريق بسبب التأخير؟',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                confirmButtonText: 'نعم، إرسال إنذار'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('تم!', 'تم إرسال الإنذار للفريق بنجاح.', 'success');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

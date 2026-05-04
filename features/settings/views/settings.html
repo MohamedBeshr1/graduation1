@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <link rel="stylesheet" href="../../../core/theme/variables.css">
     <link rel="stylesheet" href="../../dashboard/css/dashboard.css">
 </head>
+
 <body>
 
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header text-center py-4">
-            <h4 class="fw-bold m-0 fs-5" style="color: var(--white);">نظام الخريجين</h4>
+            <h4 class="fw-bold m-0 fs-5" style="color: var(--white);">Doctor</h4>
             <small class="opacity-75 text-white">معاهد العبور العليا</small>
         </div>
         <nav class="sidebar-nav mt-3">
             <a href="../../dashboard/views/instructor_dashboard.html"><i class="fas fa-home ms-2"></i> الرئيسية</a>
             <a href="../../teams/views/teams.html"><i class="fas fa-users ms-2"></i> الفرق والطلاب</a>
-            <a href="../../schedules/views/schedules.html"><i class="fas fa-calendar-alt ms-2"></i> المواعيد والقاعات</a>
+            <a href="../../schedules/views/schedules.html"><i class="fas fa-calendar-alt ms-2"></i> المواعيد
+                والقاعات</a>
             <a href="#" class="active"><i class="fas fa-cog ms-2"></i> الإعدادات</a>
-            <a href="../../landing/views/index.html" style="color: #ffc107;"><i class="fas fa-sign-out-alt ms-2"></i> خروج</a>
+            <a href="../../landing/views/index.html" style="color: #ffc107;"><i class="fas fa-sign-out-alt ms-2"></i>
+                خروج</a>
         </nav>
     </aside>
 
@@ -57,7 +61,8 @@
                                 <label class="form-label small fw-bold">كلمة المرور</label>
                                 <input type="password" class="form-control rounded-3" placeholder="********">
                             </div>
-                            <button type="button" id="saveBtn" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
+                            <button type="button" id="saveBtn"
+                                class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
                                 حفظ التغييرات
                             </button>
                         </form>
@@ -88,7 +93,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // 1. القائمة الجانبية
             const openBtn = document.getElementById('openSidebar');
             const sidebar = document.getElementById('sidebar');
@@ -110,19 +115,19 @@
             }
 
             // أكشن الحفظ
-            saveBtn.onclick = function() {
+            saveBtn.onclick = function () {
                 const newName = nameInput.value;
                 localStorage.setItem('userName', newName); // تخزين الاسم الجديد
-                
+
                 this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
-                
+
                 setTimeout(() => {
                     this.innerHTML = 'تم الحفظ بنجاح <i class="fas fa-check"></i>';
                     this.classList.replace('btn-primary', 'btn-success');
                     headerUserName.innerText = newName; // تحديث الهيدر في الحال
 
                     alert('تم تحديث بياناتك بنجاح');
-                    
+
                     setTimeout(() => {
                         this.innerHTML = 'حفظ التغييرات';
                         this.classList.replace('btn-success', 'btn-primary');
@@ -132,4 +137,5 @@
         });
     </script>
 </body>
+
 </html>

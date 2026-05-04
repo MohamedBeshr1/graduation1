@@ -3,17 +3,17 @@ const TeamsViewModel = {
     teamsData: JSON.parse(localStorage.getItem('allTeams')) || [
         { id: 1, name: "فريق النخبة", project: "نظام إدارة مشاريع التخرج", members: "أحمد | سارة | ياسين", status: "مقبول" }
     ],
-    
+
     editingId: null,
 
-    init: function() {
+    init: function () {
         this.updateHeaderName(); // تحديث الاسم في الهيدر أول ما الصفحة تفتح
         this.render();
         this.bindEvents();
     },
 
     // ---  تحديث الاسم من الـ LocalStorage ---
-    updateHeaderName: function() {
+    updateHeaderName: function () {
         const savedName = localStorage.getItem('userName');
         const headerName = document.getElementById('userName'); // تأكد إن الـ ID ده موجود في الهيدر في الـ HTML
         if (savedName && headerName) {
@@ -21,18 +21,18 @@ const TeamsViewModel = {
         }
     },
 
-    prepareForAdd: function() {
+    prepareForAdd: function () {
         this.editingId = null;
         const form = document.getElementById('addTeamForm');
         if (form) form.reset();
         document.querySelector('#addTeamModal .modal-title').innerText = "إضافة فريق جديد";
     },
 
-    render: function() {
+    render: function () {
         const tableBody = document.getElementById('teamsTableBody');
-        if(!tableBody) return;
+        if (!tableBody) return;
         document.getElementById('totalTeamsCount').innerText = this.teamsData.length;
-        
+
         let rows = "";
         this.teamsData.forEach(team => {
             rows += `
@@ -52,23 +52,23 @@ const TeamsViewModel = {
         tableBody.innerHTML = rows;
     },
 
-    getStatusBadge: function(status) {
+    getStatusBadge: function (status) {
         return status === 'مقبول' ? 'bg-success' : (status === 'قيد المراجعة' ? 'bg-warning text-dark' : 'bg-danger');
     },
 
-    saveToStorage: function() {
+    saveToStorage: function () {
         localStorage.setItem('allTeams', JSON.stringify(this.teamsData));
     },
 
-    delete: function(id) {
-        if(confirm("هل أنت متأكد من حذف هذا الفريق؟")) {
+    delete: function (id) {
+        if (confirm("هل أنت متأكد من حذف هذا الفريق؟")) {
             this.teamsData = this.teamsData.filter(t => t.id != id);
             this.saveToStorage();
             this.render();
         }
     },
 
-    edit: function(id) {
+    edit: function (id) {
         const team = this.teamsData.find(t => t.id == id);
         if (team) {
             this.editingId = id;
@@ -81,9 +81,9 @@ const TeamsViewModel = {
         }
     },
 
-    bindEvents: function() {
+    bindEvents: function () {
         const form = document.getElementById('addTeamForm');
-        if(!form) return;
+        if (!form) return;
 
         form.onsubmit = (e) => {
             e.preventDefault();

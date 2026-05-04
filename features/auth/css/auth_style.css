@@ -1,42 +1,68 @@
-/* features/auth/css/auth_style.css */
+/* خلفية الصفحة كاملة بتدرج لوني احترافي */
 .auth-bg {
-    background: linear-gradient(135deg, var(--accent-color) 0%, #f0f4f8 100%);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
+    font-family: 'Cairo', sans-serif;
 }
 
+/* تصميم الكارت الرئيسي */
 .login-card {
-    background: var(--white);
+    background: #ffffff;
+    border-radius: 20px;
     padding: 40px;
-    border-radius: 25px;
-    box-shadow: var(--shadow-lg);
-    max-width: 450px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
     width: 100%;
+    max-width: 450px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
     text-align: center;
-    border-top: 6px solid var(--primary-color);
 }
 
+/* اسم المعهد */
 .logo-title {
-    color: var(--primary-color);
+    color: #1e3a8a !important;
+    /* أزرق المعهد */
     font-weight: 900;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
 }
 
+/* تنسيق الخانات (Inputs) */
+.form-control {
+    border: 2px solid #eee !important;
+    padding: 12px 15px !important;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #1e3a8a !important;
+    box-shadow: 0 0 8px rgba(30, 58, 138, 0.1) !important;
+}
+
+/* زر الدخول "البرنس" */
 .btn-login {
-    background-color: var(--primary-color);
-    color: var(--white);
+    background: #1e3a8a !important;
+    color: #fff !important;
     font-weight: 700;
-    padding: 12px;
-    border-radius: 12px;
-    transition: var(--transition-smooth);
+    padding: 12px !important;
+    border-radius: 12px !important;
+    border: none !important;
+    transition: all 0.3s transform ease;
 }
 
 .btn-login:hover {
-    background-color: #002b5c;
-    transform: translateY(-2px);
-    color: white;
+    background: #2563eb !important;
+    transform: translateY(-3px);
+    /* حركة خفيفة لفوق */
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
 }
-.register-card {
-    max-width: 700px !important; 
+
+/* التنبيه اللي فوق */
+.alert-success {
+    background-color: #f0f7ff !important;
+    border: none !important;
+    color: #1e3a8a !important;
+    font-weight: 600;
+    border-radius: 10px;
 }

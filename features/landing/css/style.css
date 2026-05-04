@@ -1,51 +1,94 @@
-/* تنسيق خلفية الهيرو */
+:root {
+    --primary-color: #184472;
+    --white: #ffffff;
+    --transition-smooth: all 0.3s ease;
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    opacity: 0.8;
+}
+
+.nav-link:hover {
+    opacity: 1 !important;
+    color: #ffffff !important;
+    background: none !important;
+}
+
+.nav-auth-btn {
+    background-color: #ffffff !important;
+    color: #184472 !important;
+    padding: 8px 25px !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    transition: var(--transition-smooth);
+    border: none !important;
+}
+
+.nav-auth-btn:hover {
+    transform: translateY(-2px);
+    background-color: #f8f9fa !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+    color: #184472 !important;
+}
+
 .main-hero-bg {
-    background-image: url('../assets/1630661401477.jpg'); /* تأكد من مسار الصورة صح */
+    background-image: url('../assets/1630661401477.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* بيخلي الصورة ثابتة وأنت بتعمل سكرول (Parallax) */
+    background-attachment: fixed;
     position: relative;
     min-height: 80vh;
     display: flex;
     align-items: center;
 }
-features\landing\assets\1630661401477.jpg
-/* الأكواد اللي كانت محشورة جوه الـ HTML جمعتهالك هنا */
+
 .comparison-box {
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow-lg);
 }
+
 .paper-side {
     background: #fdfdfd;
     border-left: 1px solid #eee;
 }
+
 .digital-side {
     background: var(--white);
 }
-.feature-card {
+
+.feature-card,
+.goal-card {
     border-radius: 20px;
+    background: var(--white);
     transition: var(--transition-smooth);
     height: 100%;
+    padding: 25px;
+    border: none;
 }
-.feature-card:hover {
-    transform: translateY(-5px);
+
+.goal-card {
+    border-bottom: 4px solid var(--primary-color);
 }
-.nav-auth-btn {
-    background-color: var(--primary-color) !important;
-    color: var(--white) !important;
-    padding: 8px 25px !important;
-    border-radius: 10px !important;
-    font-weight: 700 !important;
-    text-decoration: none !important;
+
+.feature-card:hover,
+.goal-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg) !important;
 }
-.hero-image-container, .about-img-container {
-    margin-top: 50px; 
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg); 
-    border: 8px solid rgba(255, 255, 255, 0.8); 
-}
+
 .feature-item {
     display: flex;
     align-items: flex-start;
@@ -56,23 +99,36 @@ features\landing\assets\1630661401477.jpg
     box-shadow: var(--shadow-sm);
     border-right: 5px solid var(--primary-color);
 }
-.goal-card {
-    border: none;
-    border-radius: 20px;
-    background: var(--white);
+
+.hero-image-container,
+.about-img-container {
+    margin-top: 50px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 8px solid rgba(255, 255, 255, 0.8);
+}
+
+.hover-effect {
     transition: all 0.3s ease;
-    height: 100%;
-    border-bottom: 4px solid var(--primary-color);    
-    padding: 25px;
+    border: 1px solid #ddd;
 }
-.goal-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-lg) !important;
+
+.hover-effect:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: #004085;
 }
+
+.modal-header .btn-close {
+    margin: 0;
+    margin-right: auto;
+}
+
 .icon-badge {
     width: 50px;
     height: 50px;
-    background: var(--accent-color);
+    background: #eef2f7;
     color: var(--primary-color);
     border-radius: 12px;
     display: flex;
@@ -80,23 +136,4 @@ features\landing\assets\1630661401477.jpg
     justify-content: center;
     font-size: 22px;
     margin-bottom: 20px;
-}
-/*اخر جزء*/
-    .hover-effect { transition: all 0.3s ease; border: 1px solid #ddd; }
-    .hover-effect:hover { 
-        transform: translateY(-5px); 
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        border-color: #004085;
-    }
-    /* تنسيق بسيط عشان الزرار يفضل واخد ستايل اللاندينج بتاعك */
-    .nav-auth-btn {
-        background-color: #004085;
-        color: white;
-        padding: 8px 20px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-    .modal-header .btn-close {
-    margin: 0; /* بيشيل أي مسافات قديمة */
-    margin-right: auto; /* بيزق الزرار لأقصى الشمال في حالة الـ RTL */
 }

@@ -1,34 +1,37 @@
-body { 
-    font-family: 'Cairo', sans-serif; 
-    background-color: var(--accent-color); 
-    overflow-x: hidden; 
-    margin: 0; 
-    padding: 0; 
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #e3f2fd;
+    /* لبني سماوي فاتح جداً هينور الصفحة */
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 /* Sidebar Styles */
 .sidebar {
     position: fixed;
     top: 0;
-    right: -280px; 
+    right: -280px;
     width: 280px;
     height: 100vh;
-    background: var(--primary-color);
+    background: #1a237e;
     color: var(--white);
     transition: var(--transition-smooth);
     z-index: 2000;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
 }
 
-.sidebar.active { right: 0; }
+.sidebar.active {
+    right: 0;
+}
 
 .sidebar-header {
     padding: 30px 20px;
     text-align: center;
-    background: rgba(0,0,0,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(6, 6, 6, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar-nav a {
@@ -37,24 +40,30 @@ body {
     color: var(--white);
     text-decoration: none;
     transition: var(--transition-smooth);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     font-weight: 700;
 }
 
-.sidebar-nav a:hover, .sidebar-nav a.active {
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
     background: var(--secondary-color);
     padding-right: 35px;
 }
 
 .overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
     display: none;
     z-index: 1500;
 }
-.overlay.active { display: block; }
+
+.overlay.active {
+    display: block;
+}
 
 .main-header {
     background: var(--white);
@@ -69,16 +78,21 @@ body {
 }
 
 .card-custom {
-    background: var(--white);
+    background: #ffffff !important;
+    /* أبيض صريح */
     border-radius: 20px;
     padding: 25px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05) !important;
+    /* ظل خفيف اوي وشيك */
     border: none;
 }
+
 /* زرار القائمة الجانبية - رجعناه للأزرق الأصلي */
 .btn-toggle {
-    background-color: var(--primary-color) !important; /* اللون الأزرق الأساسي */
-    color: var(--white) !important; /* لون الأيقونة أبيض */
+    background-color: var(--primary-color) !important;
+    /* اللون الأزرق الأساسي */
+    color: var(--white) !important;
+    /* لون الأيقونة أبيض */
     border: none !important;
     padding: 10px 16px;
     border-radius: 10px;
@@ -88,15 +102,64 @@ body {
     align-items: center;
     justify-content: center;
     transition: var(--transition-smooth);
-    box-shadow: var(--shadow-sm); /* ظل خفيف عشان يبرز */
+    box-shadow: var(--shadow-sm);
+    /* ظل خفيف عشان يبرز */
 }
 
 .btn-toggle:hover {
-    background-color: var(--secondary-color) !important; /* يفتح سنة عند الوقوف عليه */
-    transform: scale(1.05); /* حركة خفيفة */
+    background-color: var(--secondary-color) !important;
+    /* يفتح سنة عند الوقوف عليه */
+    transform: scale(1.05);
+    /* حركة خفيفة */
 }
 
 /* التأكد من لون الأيقونة جوه الزرار */
 .btn-toggle i {
     color: #ffffff !important;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #1a237e !important;
+    /* خلي الخط كحلي عشان يبان */
+}
+
+h2,
+h5,
+h6,
+p,
+span {
+    color: #1a237e !important;
+    /* كل النصوص تبقى كحلي غامق بدل الأبيض */
+}
+
+/* ده هيخلي الأيقونات تظهر دايماً بلون أبيض أو لبني فاتح */
+.sidebar-nav a i {
+    color: #ffffff !important;
+    /* لون الأيقونة أبيض */
+    opacity: 0.8 !important;
+    /* شفافة سنة بسيطة عشان تبان شيك */
+    margin-left: 10px;
+    /* مسافة بين الأيقونة والكلام */
+    display: inline-block !important;
+    /* يضمن إنها تظهر */
+}
+
+/* لما تقفي عليها اللون يبقى أوضح */
+.sidebar-nav a:hover i {
+    opacity: 1 !important;
+    color: #00d2ff !important;
+    /* لون لبني سماوي يفتح لما تقفي عليها */
+}
+
+/* الكود ده بيحول الصور السوداء للون أبيض شيك */
+.sidebar img,
+.sidebar-nav img {
+    filter: brightness(0) invert(1) !important;
+    width: 20px !important;
+    /* اتأكدي إن حجمها مناسب */
+    margin-left: 10px !important;
+    display: inline-block !important;
 }
